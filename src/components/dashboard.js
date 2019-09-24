@@ -13,12 +13,18 @@ class Dashboard extends Component {
         }
     }
   
+    getEnvironments=()=> {
+        fetch('http://localhost:3001/environments').then(res => res.json()).then(environments => this.setState({environments: environments}))
+    }
   
+    componentWillMount(){
+        this.getEnvironments()
+    }
   
     render() {
     return <div> 
         
-        <DeedCreateForm user={this.state.user} functionToRender={()=>console.log("You tried to make an deed and now you're trying to render it")}/>
+        <DeedCreateForm user={this.state.user} environments={this.state.environments} functionToRender={()=>console.log("You tried to make an deed and now you're trying to render it")}/>
         {this.state.deeds ? <DeedList deeds = {this.state.deeds} /> : null}
         {this.state.environments ? <EnvironmentList environments = {this.state.environments} /> : null}
         </div>

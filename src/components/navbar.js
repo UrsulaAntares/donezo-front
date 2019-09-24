@@ -37,14 +37,14 @@ const NavBar = () => {
               {/* Login link only shows if no one logged in */}
               <NavLink
                 className = "navbar-item"
-                to = "/triplist"
+                to = "/environments"
                 exact
-              >Trip List</NavLink>
+              >Environments</NavLink>
               <NavLink
                 className = "navbar-item"
-                to = "/trip"
+                to = "/deeds"
                 exact
-              >Trip</NavLink>
+              >Deeds</NavLink>
             </div>
 
             <div className="navbar-end">
