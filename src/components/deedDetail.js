@@ -44,15 +44,15 @@ class DeedDetail extends Component {
 
            componentDidMount(){
                 if (this.state.deed) {
+                    if (this.state.deed.start){
+                        this.setState({deed: {...this.state.deed, end: this.state.deed.start}})
+                    }
                     if (this.state.deed.duetime || this.state.deed.tags) {
                         this.setState({deed: {...this.state.deed, duetime: this.state.deed.duetime ? this.state.deed.duetime.split("T")[1].slice(0,5) : null, 
                         tags: this.state.deed.tags ? this.state.deed.tags.map(tag => {return tag.name}).join(", ") : null,
                         environment_name: this.state.deed.environment ? this.state.deed.environment.name : null 
                     }
                     })
-                    }
-                    if (this.state.deed.start){
-                        this.setState({deed: {...this.state.deed, end: this.state.deed.start}})
                     }
 
                 }

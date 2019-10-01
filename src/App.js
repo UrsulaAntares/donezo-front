@@ -171,9 +171,10 @@ componentDidMount() {
            }
 
            if (this.state.tags){
+            
            return (<div>
              Here be a tags worth
-             <TagPage tag = {loadTag()} deeds={this.state.deeds? this.state.deeds.filter(deed=> {return deed.tags.includes(loadTag().id)}) :null}/>
+             <TagPage tag = {loadTag()} deeds={this.state.deeds? this.state.deeds.filter(deed=> {return deed.tags.map(t => t.name).includes(loadTag().name)}) :null}/>
             </div>
            )}
        }
