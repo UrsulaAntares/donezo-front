@@ -24,11 +24,11 @@ const NavBar = () => {
 
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">
-              {/* <NavLink
+              <NavLink
                 className = "navbar-item"
-                to = "/home"
+                to = "/dashboard"
                 exact
-              >Home</NavLink>  */}
+              >Dashboard</NavLink> 
               {!window.localStorage.username ? <NavLink
                 className = "navbar-item"
                 to = "/login"
@@ -44,7 +44,12 @@ const NavBar = () => {
                 className = "navbar-item"
                 to = "/deeds"
                 exact
-              >Deeds</NavLink>
+              >Deeds to Do</NavLink>
+              <NavLink
+                className = "navbar-item"
+                to = "/done"
+                exact
+              >Done Deeds</NavLink>
             </div>
 
             <div className="navbar-end">

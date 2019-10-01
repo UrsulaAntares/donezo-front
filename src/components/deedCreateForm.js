@@ -7,7 +7,7 @@ class DeedCreateForm extends Component {
     constructor() {
         super()
         this.state = {
-            name: null
+            
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,26 +18,27 @@ class DeedCreateForm extends Component {
         handleChange=(event) =>{
             this.setState({deed:{pack: event.currentTarget.pack.value, scale: event.currentTarget.scale.value, 
                 name: event.currentTarget.name.value, user_id: window.localStorage.user_id,
-                due: event.currentTarget.due.value, description: event.currentTarget.description.value,
-                supplies: event.currentTarget.supplies.value, duration: event.currentTarget.duration.value,
-                environment: event.currentTarget.environment.value, importance: event.currentTarget.importance.value,
-                desirability: event.currentTarget.desirability.value, 
-                
+                duedate: event.currentTarget.duedate.value, 
+                duetime: event.currentTarget.duetime.value, 
+                description: event.currentTarget.description.value,
+                supplies: event.currentTarget.supplies.value, 
+                duration: event.currentTarget.duration.value,
+                environment: event.currentTarget.environment.value, 
+                importance: event.currentTarget.importance.value,
+                desirability: event.currentTarget.desirability.value, tags: event.currentTarget.tags.value, 
+                status: event.currentTarget.status.value, 
+                cause_deed: event.currentTarget.cause_deed.value,
+                result_deed: event.currentTarget.result_deed.value
             }});
           }
 
 
-        //   handleSubmit =(event)=> {
-        //     alert('The form was submitted: ' + this.state.name);
-        //     event.preventDefault();
-        //   }
-    
+
  
 
 
     makeTheDeed = (event) => {
 
-        
         let data = this.state.deed
 
             event.preventDefault()
@@ -53,24 +54,29 @@ class DeedCreateForm extends Component {
             },
 
             body: JSON.stringify(data)
-        }).then(something => {this.setState({deed:{...this.state.deed, name: "", notes: "", pack: "", supplies: "", duration: ""}})
-            console.log("We should have set the state")
+        }).then(something => {this.props.getDeeds(); this.props.tallyScore();
+            this.setState({deed:{...this.state.deed, name: "", description: "",
+             pack: "", supplies: "", duration: null, tags:"", status: ""}})
+
         })
 
-        
-        
+        //add logic for rendering             
     }
+
+
+    
+
 
     render() {
 
         return (
         <div className="comp box deedcreationform form">
-            <section className="hero is-primary is-fullheight">
-            <div className="hero-body">
+            <section className="">
+            <div className="">
                 <div className="container">
                     <div className="columns is-centered">
-                        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-                            <form action="" className="box" onSubmit={(event) => this.makeTheDeed(event)} onChange={this.handleChange}>
+                        <div className="bar">
+                            <form action="" className="box thinform" onSubmit={(event) => this.makeTheDeed(event)} onChange={this.handleChange}>
                                 
                                 <div className = "inner-form-box">
 
@@ -80,60 +86,96 @@ class DeedCreateForm extends Component {
                                 </div>
 
                                 <div className="field">
-                                    {/* <label htmlFor="date" className="label">When's it due?</label> */}
-                                <input name="due" className="input" type="datetime-local" defaultValue={(new Date()).toISOString().slice(0,16)} />
+                                    {/* <label htmlFor="duedate" className="label">When's it due?</label> */}
+                                <input name="duedate" className="input" type="date"  />
+                                </div>
+                                <div className="field">
+                                    {/* <label htmlFor="duedate" className="label">Is there a time?</label> */}
+                                <input name="duetime" className="input" type="time"  />
                                 </div>
 
                                 <div className="field">
                                     {/* <label htmlFor="duration" className="label">How many minutes will this take?</label> */}
-                                <input name="duration" className="input" type="number" />
+                                <input name="duration" className="input number" type="number" />
                                 </div>
 
 
                                 <div className="field">
                                     <select name="scale" className="input" >
                                         <option value="" disabled selected>What's the time scale?</option>
-                                        <option value="minutes">Minutes</option>
-                                        <option value="hours">Hours</option>
-                                        <option value="days">Days</option>
-                                        <option value="weeks">Weeks</option>
-                                        <option value="months">Months</option>
-                                        <option value="years">Years</option>
+                                        <option value="Minutes">Minutes</option>
+                                        <option value="Hours">Hours</option>
+                                        <option value="Days">Days</option>
+                                        <option value="Weeks">Weeks</option>
+                                        <option value="Months">Months</option>
+                                        <option value="Years">Years</option>
+                                    </select>
+                                </div>
+
+                                <div className="field">
+                                    <select name="status" className="input" >
+                                        <option value="" disabled selected>What's the status?</option>
+                                        <option value="Next">Next</option>
+                                        <option value="Now">Now</option>
+                                        <option value="Later">Later</option>
+                                        <option value="Some Day">Some Day</option>
+                                        <option value="Donezo">Donezo</option>
+                                        <option value="Nevermind">Nevermind</option>
                                     </select>
                                 </div>
 
                                 <div className="field">
                                     
-                                    <input name="description" className="input" type="text" placeholder="Add some notes" />
+                                    <input name="description" className="input" type="text" placeholder="Add a description?" value={this.state.deed ? this.state.deed.description : ""}/>
                                 </div>
 
                                 <div className="field">
                                     
-                                    <input name="supplies" className="input" type="text" placeholder="What supplies do you need?" />
+                                    <input name="supplies" className="input" type="text" placeholder="What supplies do you need to acquire?" value={this.state.deed ? this.state.deed.supplies : ""}/>
                                 </div>
 
                                 <div className="field">
-                                    <input name="pack" className="input" type="text" placeholder="What do you need to pack?" />
+                                    <input name="pack" className="input" type="text" placeholder="What do you need to pack?" value={this.state.deed ? this.state.deed.pack : ""}/>
                                 </div>
 
                                 <div className="field">
+                                    <label htmlFor="importance" className="label">How important is this?</label>
                                     <input type="range" className="input" min="-100" max="100"  defaultValue="0" class="slider" name="importance" />
                                 </div>
 
                                 <div className="field">
+                                   <label htmlFor="desirability" className="label">How much do you want to do this?</label>
                                     <input type="range" className="input" min="-100" max="100" defaultValue="0"  class="slider" name="desirability" />
                                 </div>
 
                                 <div className="field">
-                                       
-                                       
-                                    <input list="environments" name="environment" className="input"></input>
+                                    <input list="environments" name="environment" className="input" placeholder="Type to select or create an environment"></input>
                                     <datalist id="environments">
-                                        {this.props.environments ? this.props.environments.map(environment => <option key={environment.id} value={environment.name}></option> ) : console.log("No environments")}
-                                       
-                                         
-                         
+                                        {/* <option value="" disabled selected>What's the environment for this deed?</option> */}
+                                        {this.props.environments ? this.props.environments.map(environment => <option key={environment.name} value={environment.name}></option> ) : null}
                                     </datalist>
+                                </div>
+
+
+                                <div className="field">
+                                    <input list="unDoneDeeds" name="cause_deed" className="input" placeholder="Does this deed follow another?"></input>
+                                    <datalist id="unDoneDeeds">
+                                        <option value="" disabled selected>What's the predecessor for this deed?</option>
+                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                                    </datalist>
+                                </div> 
+
+                                 <div className="field">
+                                    <input list="unDoneDeeds" name="result_deed" className="input" placeholder="Does another deed follow this?"></input>
+                                    <datalist id="unDoneDeeds">
+                                        <option value="" disabled selected>What's the predecessor for this deed?</option>
+                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                                    </datalist>
+                                </div>    
+                              
+
+                                <div className="field">
+                                    <input name="tags" className="input" type="text" placeholder="Tags, terms (use commas)" />
                                 </div>
 
                                 <input type="submit" className="button"/>
