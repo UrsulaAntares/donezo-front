@@ -32,7 +32,7 @@ class DeedCard extends Component {
     return <div className="box">
         <h2>{this.props.name}</h2>
         <h3>Importance: {this.props.importance} * Desirability: {this.props.desirability} = Score: {(this.props.importance * this.props.desirability /100)}</h3>
-        {this.props.duedate ? <h4>Due:{this.props.duedate} {this.props.duetime ? this.props.duetime :null}</h4> :null}
+        {this.props.start ? <h4>Due:{this.props.start} {this.props.duetime ? this.props.duetime :null}</h4> :null}
         {this.props.scale ? <h4>Scale: {this.props.scale}</h4> : null}
         {this.props.supplies ? <p>Supplies: {this.props.supplies}</p> : null }
         {this.props.pack ? <p>Pack: {this.props.pack}</p> : null }

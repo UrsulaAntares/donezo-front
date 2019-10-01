@@ -10,6 +10,7 @@ import DeedList from './containers/deedList';
 import EnvironmentPage from './components/environmentPage';
 import TagPage from './components/tagPage'
 import TagList from './containers/tagList'
+import Calendar from './containers/calendar';
 
 class App extends React.Component {
 
@@ -134,6 +135,8 @@ componentDidMount() {
 
           <Route path="/login" component={Login} />
 
+          <Route path="/calendar" exact  render={()=> { return this.state.unDoneDeeds ? <Calendar deeds={this.state.unDoneDeeds}/> : null }} />
+
 
           <Route  path={`/environments/:name`} render = {props => {
            
@@ -160,10 +163,10 @@ componentDidMount() {
            console.log("Props in App", props.match.params.name)
            // console.log("Trips State in App", this.state.trips)
            const loadTag = () => {
-             debugger
+
              return this.state.tags ? this.state.tags.find(tag => {
                
-               return props.match.params.name === tag.name
+               return props.match.params.name.toLowerCase() === tag.name.toLowerCase()
              }) : null
            }
 

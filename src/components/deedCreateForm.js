@@ -18,7 +18,8 @@ class DeedCreateForm extends Component {
         handleChange=(event) =>{
             this.setState({deed:{pack: event.currentTarget.pack.value, scale: event.currentTarget.scale.value, 
                 name: event.currentTarget.name.value, user_id: window.localStorage.user_id,
-                duedate: event.currentTarget.duedate.value, 
+                start: event.currentTarget.start.value, 
+                end: event.currentTarget.start.value, 
                 duetime: event.currentTarget.duetime.value, 
                 description: event.currentTarget.description.value,
                 supplies: event.currentTarget.supplies.value, 
@@ -86,11 +87,11 @@ class DeedCreateForm extends Component {
                                 </div>
 
                                 <div className="field">
-                                    {/* <label htmlFor="duedate" className="label">When's it due?</label> */}
-                                <input name="duedate" className="input" type="date"  />
+                                    {/* <label htmlFor="start" className="label">When's it due?</label> */}
+                                <input name="start" className="input" type="date"  />
                                 </div>
                                 <div className="field">
-                                    {/* <label htmlFor="duedate" className="label">Is there a time?</label> */}
+                                    {/* <label htmlFor="start" className="label">Is there a time?</label> */}
                                 <input name="duetime" className="input" type="time"  />
                                 </div>
 

@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.7.5",
+    "moment": "^2.24.0",
     "react": "^16.9.0",
+    "react-big-calendar": "^0.22.1",
     "react-datetime": "^2.16.3",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "typescript": "^3.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +33,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
+    "eslint": "^6.5.1",
+    "eslint-plugin-react": "^7.15.0"
   }
 }

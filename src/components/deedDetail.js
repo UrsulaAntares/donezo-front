@@ -17,8 +17,8 @@ class DeedDetail extends Component {
         this.setState({deed:{ ...this.state.deed, 
             name: event.currentTarget.name.value,
             scale: event.currentTarget.scale.value,  
-            
-            duedate: event.currentTarget.duedate.value,
+            start: event.currentTarget.start.value,
+            end: event.currentTarget.start.value,
             duetime: event.currentTarget.duetime.value, 
             description: event.currentTarget.description.value,
             duration: event.currentTarget.duration.value,
@@ -49,11 +49,11 @@ class DeedDetail extends Component {
                         tags: this.state.deed.tags ? this.state.deed.tags.map(tag => {return tag.name}).join(", ") : null,
                         environment_name: this.state.deed.environment ? this.state.deed.environment.name : null 
                     }
-                    
                     })
-                    
                     }
-            
+                    if (this.state.deed.start){
+                        this.setState({deed: {...this.state.deed, end: this.state.deed.start}})
+                    }
 
                 }
 
@@ -69,7 +69,8 @@ class DeedDetail extends Component {
             desirability: event.currentTarget.desirability.value, 
             environment_name: this.state.deed.environment_name,
             environment: event.currentTarget.environment_name,
-            duedate: event.currentTarget.duedate.value,
+            start: event.currentTarget.start.value,
+            end: event.currentTarget.start.value,
             duetime: event.currentTarget.duetime.value, 
             duration: event.currentTarget.duration.value,
             supplies: event.currentTarget.supplies.value, 
@@ -122,15 +123,15 @@ class DeedDetail extends Component {
         
        
         
-        {/* {this.state.deed.duedate ? <h4>Due: {this.state.deed.duedate} {this.state.deed.duetime ? this.state.deed.duetime :null}</h4> :null} */}
+        {/* {this.state.deed.start ? <h4>Due: {this.state.deed.start} {this.state.deed.duetime ? this.state.deed.duetime :null}</h4> :null} */}
 
         <div className="field">
-            <label htmlFor="duedate" className="label">When's it due?</label>
-            <input name="duedate" className="input" type="date" value={this.state.deed ? this.state.deed.duedate : null} />
+            <label htmlFor="start" className="label">When's it due?</label>
+            <input name="start" className="input" type="date" value={this.state.deed ? this.state.deed.start : null} />
         </div>
     
         <div className="field">
-            <label htmlFor="duedate" className="label">Is there a specific time?</label>
+            <label htmlFor="duetime" className="label">Is there a specific time?</label>
             <input name="duetime" className="input" type="time"  value={this.state.deed && this.state.deed.duetime ? this.state.deed.duetime : null} />
         </div>
 
