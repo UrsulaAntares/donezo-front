@@ -17,7 +17,7 @@ class DeedCreateForm extends Component {
 
         handleChange=(event) =>{
             this.setState({deed:{pack: event.currentTarget.pack.value, scale: event.currentTarget.scale.value, 
-                name: event.currentTarget.name.value, user_id: window.localStorage.user_id,
+                title: event.currentTarget.title.value, user_id: window.localStorage.user_id,
                 start: event.currentTarget.start.value, 
                 end: event.currentTarget.start.value, 
                 duetime: event.currentTarget.duetime.value, 
@@ -56,7 +56,7 @@ class DeedCreateForm extends Component {
 
             body: JSON.stringify(data)
         }).then(something => {this.props.getDeeds(); this.props.tallyScore();
-            this.setState({deed:{...this.state.deed, name: "", description: "",
+            this.setState({deed:{...this.state.deed, title: "", description: "",
              pack: "", supplies: "", duration: null, tags:"", status: ""}})
 
         })
@@ -83,7 +83,7 @@ class DeedCreateForm extends Component {
 
                                 <div className="field">
                                     {/* <label for="name" className="label">Name your deed</label> */}
-                                    <input name="name" className="input" type="text" placeholder="Name your deed" value={this.state.deed ? this.state.deed.name : ""}/>
+                                    <input name="title" className="input" type="text" placeholder="Title your deed" value={this.state.deed ? this.state.deed.title : ""}/>
                                 </div>
 
                                 <div className="field">
@@ -162,7 +162,7 @@ class DeedCreateForm extends Component {
                                     <input list="unDoneDeeds" name="cause_deed" className="input" placeholder="Does this deed follow another?"></input>
                                     <datalist id="unDoneDeeds">
                                         <option value="" disabled selected>What's the predecessor for this deed?</option>
-                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.title}</option> ) : null}
                                     </datalist>
                                 </div> 
 
@@ -170,7 +170,7 @@ class DeedCreateForm extends Component {
                                     <input list="unDoneDeeds" name="result_deed" className="input" placeholder="Does another deed follow this?"></input>
                                     <datalist id="unDoneDeeds">
                                         <option value="" disabled selected>What's the predecessor for this deed?</option>
-                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                                        {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.title}</option> ) : null}
                                     </datalist>
                                 </div>    
                               

@@ -4,7 +4,7 @@ class DeedCard extends Component {
   
     updateDeed=(event)=> {
         let data = {status: event.currentTarget.status.value}
-        let deed_id = event.currentTarget.name
+        let deed_id = event.currentTarget.title
      
 
             event.preventDefault()
@@ -38,7 +38,7 @@ class DeedCard extends Component {
         {this.props.pack ? <p>Pack: {this.props.pack}</p> : null }
         {this.props.environment ? <p>Environment: {this.props.environment}</p> : null }
         {this.props.status ? <p>Status: {this.props.status}</p> : null }
-        <form onSubmit={this.updateDeed} name={this.props.deed_id}>
+        <form onSubmit={this.updateDeed} title={this.props.deed_id}>
             <div className="field">
                 <select name="status" className="input" >
                     <option value="" disabled selected>{this.props.status}</option>

@@ -1,4 +1,5 @@
 import React, { Component, Fragment} from 'react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class DeedDetail extends Component {
 
@@ -15,7 +16,7 @@ class DeedDetail extends Component {
 
     handleChange=(event) =>{
         this.setState({deed:{ ...this.state.deed, 
-            name: event.currentTarget.name.value,
+            title: event.currentTarget.name.value,
             scale: event.currentTarget.scale.value,  
             start: event.currentTarget.start.value,
             end: event.currentTarget.start.value,
@@ -64,7 +65,7 @@ class DeedDetail extends Component {
   
     updateDeed=(event)=> {
         let data = {status: event.currentTarget.status.value, 
-            name: event.currentTarget.name.value,
+            title: event.currentTarget.name.value,
             importance: event.currentTarget.importance.value,
             desirability: event.currentTarget.desirability.value, 
             environment_name: this.state.deed.environment_name,
@@ -113,9 +114,9 @@ class DeedDetail extends Component {
         <form onChange={this.handleChange} onSubmit={this.updateDeed}  name={this.props.deed_id}>
         
             <div className="field">
-                <label for="name" className="label">Name your deed</label>
+                <label for="title" className="label">Title your deed</label>
                 <h2>
-                <input name="name" className="input" type="text" placeholder="Name your deed" value={this.state.deed ? this.state.deed.name : this.props.deed.name}/>
+                <input name="title" className="input" type="text" placeholder="Name your deed" value={this.state.title? this.state.deed.title : this.props.deed.title}/>
                 </h2>
             </div>
 
@@ -172,7 +173,7 @@ class DeedDetail extends Component {
         {this.props.pack ? <p>Pack: {this.props.pack}</p> : null } */}
 
         <div className="field">
-            <label className="label" htmlFor="environments">Environment where this happens (type to select or enter a new one): {this.state.deed && this.state.deed.environment_name ? this.state.deed.environment_name : null}</label>
+            <label className="label" htmlFor="environments">Environment where this happens (type to select or enter a new one): {this.state.deed && this.state.deed.environment ? <Link to={`/environments/${this.state.deed.environment.name}`} >{this.state.deed.environment.name}</Link> : null}</label>
             <input list="environments" name="environment" className="input"></input>
             <datalist id="environments"  placeholder="Type to select or create an environment">
                 {this.props.environments ? this.props.environments.map(environment => <option key={environment.id} value={environment.name}></option> ) : null}
@@ -195,23 +196,29 @@ class DeedDetail extends Component {
         </div>
 
         <div className="field">
-            <label for="name" className="label">Tags</label>
+            
+            <label for="name" className="label">Tags: {this.props.deed.tags ? this.props.deed.tags.map(tag => <Link style={{marginRight: '1em'}} to={`/tags/${tag.name}`} >{tag.name}</Link>) : null}</label>
             <input name="tags" className="input" type="text" placeholder="Tags, terms (use commas)" value={this.state.deed && this.state.deed.tags ? this.state.deed.tags : null}/>
         </div>
 
         <div className="field">
+            <label for="cause_deed" className="label">This deed follows: {this.state.deed && this.state.deed.chores ? this.state.deed.chores.map(chore => <Link style={{marginRight: '1em'}} to={`/deeds/${chore.chore.id}`} >{chore.chore.title}</Link>) : null }</label>
             <input list="unDoneDeeds" name="cause_deed" className="input" placeholder="Does this deed follow another?"></input>
             <datalist id="unDoneDeeds">
                 <option value="" disabled selected>What's the predecessor for this deed?</option>
-                {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.title}</option> ) : null}
             </datalist>
         </div> 
 
             <div className="field">
+            <label for="result_deed" className="label">If you do this, then: {this.state.deed && this.state.deed.gratifications ?
+                 this.state.deed.gratifications.map(grat => <Link style={{marginRight: '1em'}} to={`/deeds/${grat.gratification.id}`} >{grat.gratification.title}</Link>)
+                  : null }</label>
+
             <input list="unDoneDeeds" name="result_deed" className="input" placeholder="Does another deed follow this?"></input>
             <datalist id="unDoneDeeds">
                 <option value="" disabled selected>What's the predecessor for this deed?</option>
-                {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.name}</option> ) : null}
+                {this.props.unDoneDeeds ? this.props.unDoneDeeds.map(deed => <option key={deed.id} value={deed.id} >{deed.title}</option> ) : null}
             </datalist>
         </div> 
 

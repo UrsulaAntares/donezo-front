@@ -11,6 +11,7 @@ import EnvironmentPage from './components/environmentPage';
 import TagPage from './components/tagPage'
 import TagList from './containers/tagList'
 import Calendar from './containers/calendar';
+import DeedDetail from './components/deedDetail'
 
 class App extends React.Component {
 
@@ -129,18 +130,23 @@ componentDidMount() {
           <Route exact path="/tags" render={() =>
             {return <TagList tags={this.state.tags}/>}} />
 
+          <Route path="/nevermind" render={() =>   
+            {return <DeedList deeds={this.state.nevermind}/>}} /> 
+
 
           <Route path="/done" render={() =>   
-            {return <DeedList deeds={this.state.donedeeds}/>}} />
+            {return <DeedList deeds={this.state.doneDeeds}/>}} />
 
           <Route path="/login" component={Login} />
 
           <Route path="/calendar" exact  render={()=> { return this.state.unDoneDeeds ? <Calendar deeds={this.state.unDoneDeeds}/> : null }} />
 
+          <Route path="/calendone" exact  render={()=> { return this.state.doneDeeds ? <Calendar deeds={this.state.doneDeeds}/> : null }} />
+
 
           <Route  path={`/environments/:name`} render = {props => {
            
-              console.log("Props in App", props.match.params.name)
+              // console.log("Props in App", props.match.params.name)
               // console.log("Trips State in App", this.state.trips)
               const loadEnvironment = () => {
                 return this.state.environments ? this.state.environments.find(environment => {
@@ -171,10 +177,26 @@ componentDidMount() {
            }
 
            if (this.state.tags){
-            
            return (<div>
-             Here be a tags worth
              <TagPage tag = {loadTag()} deeds={this.state.deeds? this.state.deeds.filter(deed=> {return deed.tags.map(t => t.name).includes(loadTag().name)}) :null}/>
+            </div>
+           )}
+       }
+         }/>
+
+
+          <Route  path={`/deeds/:id`} render = {props => {
+           
+           console.log("Props in App", props.match.params.id)
+           // console.log("Trips State in App", this.state.trips)
+          //  const loadDeed = () => {
+          //    return this.state.deeds ? this.state.deeds.find_by(id: props.match.params.id) : null
+          //  }
+
+           if (this.state.deeds){
+           return (<div>
+             
+             <DeedDetail deed = {this.state.deeds.find(deed => deed.id == parseInt(props.match.params.id))}/>
             </div>
            )}
        }
