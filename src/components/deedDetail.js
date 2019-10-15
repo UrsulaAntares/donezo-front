@@ -16,7 +16,7 @@ class DeedDetail extends Component {
 
     handleChange=(event) =>{
         this.setState({deed:{ ...this.state.deed, 
-            title: event.currentTarget.name.value,
+            title: event.currentTarget.title.value,
             scale: event.currentTarget.scale.value,  
             start: event.currentTarget.start.value,
             end: event.currentTarget.start.value,
@@ -30,6 +30,7 @@ class DeedDetail extends Component {
             importance: event.currentTarget.importance.value,
             desirability: event.currentTarget.desirability.value, 
             tags: event.currentTarget.tags.value,
+            shoppings: event.currentTarget.shoppings.value,
             status: event.currentTarget.status.value, 
             cause_deed: event.currentTarget.cause_deed.value,
             result_deed: event.currentTarget.result_deed.value
@@ -48,9 +49,10 @@ class DeedDetail extends Component {
                     if (this.state.deed.start){
                         this.setState({deed: {...this.state.deed, end: this.state.deed.start}})
                     }
-                    if (this.state.deed.duetime || this.state.deed.tags) {
+                    if (this.state.deed.duetime || this.state.deed.tags || this.state.deed.shoppings) {
                         this.setState({deed: {...this.state.deed, duetime: this.state.deed.duetime ? this.state.deed.duetime.split("T")[1].slice(0,5) : null, 
                         tags: this.state.deed.tags ? this.state.deed.tags.map(tag => {return tag.name}).join(", ") : null,
+                        shoppings: this.state.deed.shoppings ? this.state.deed.shoppings.map(shopping => {return shopping.title}).join(", ") : null,
                         environment_name: this.state.deed.environment ? this.state.deed.environment.name : null 
                     }
                     })
@@ -65,7 +67,7 @@ class DeedDetail extends Component {
   
     updateDeed=(event)=> {
         let data = {status: event.currentTarget.status.value, 
-            title: event.currentTarget.name.value,
+            title: event.currentTarget.title.value,
             importance: event.currentTarget.importance.value,
             desirability: event.currentTarget.desirability.value, 
             environment_name: this.state.deed.environment_name,
@@ -79,6 +81,7 @@ class DeedDetail extends Component {
             scale: event.currentTarget.scale.value,
             description: event.currentTarget.description.value,
             tags: event.currentTarget.tags.value,
+            shoppings: event.currentTarget.shoppings.value,
             result_deed: event.currentTarget.result_deed.value,
             cause_deed: event.currentTarget.cause_deed.value
         }
@@ -116,7 +119,7 @@ class DeedDetail extends Component {
             <div className="field">
                 <label for="title" className="label">Title your deed</label>
                 <h2>
-                <input name="title" className="input" type="text" placeholder="Name your deed" value={this.state.title? this.state.deed.title : this.props.deed.title}/>
+                <input name="title" className="input" type="text" placeholder="Title your deed" value={this.state.deed.title? this.state.deed.title : this.props.deed.title}/>
                 </h2>
             </div>
 
@@ -202,7 +205,15 @@ class DeedDetail extends Component {
         </div>
 
         <div className="field">
-            <label for="cause_deed" className="label">This deed follows: {this.state.deed && this.state.deed.chores ? this.state.deed.chores.map(chore => <Link style={{marginRight: '1em'}} to={`/deeds/${chore.chore.id}`} >{chore.chore.title}</Link>) : null }</label>
+            
+            <label for="name" className="label">Shopping List: {this.props.deed.shoppings ? this.props.deed.shoppings.map(shopping => <Link style={{marginRight: '1em'}} to={`/shoppings/${shopping.title}`} >{shopping.title}</Link>) : null}</label>
+            <input name="shoppings" className="input" type="text" placeholder="Things to get (use commas)" value={this.state.deed && this.state.deed.shoppings ? this.state.deed.shoppings : null}/>
+        </div>
+
+        <div className="field">
+            <label for="cause_deed" className="label">This deed follows: {this.state.deed && this.state.deed.chores ? 
+                this.state.deed.chores.map(chore => <Link style={{marginRight: '1em'}} to={`/deeds/${chore.chore.id}`} >
+                {chore.chore.title}</Link>) : null }</label>
             <input list="unDoneDeeds" name="cause_deed" className="input" placeholder="Does this deed follow another?"></input>
             <datalist id="unDoneDeeds">
                 <option value="" disabled selected>What's the predecessor for this deed?</option>

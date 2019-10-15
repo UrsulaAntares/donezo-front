@@ -59,7 +59,8 @@ class DeedCreateForm extends Component {
             this.setState({deed:{...this.state.deed, title: "", description: "",
              pack: "", supplies: "", duration: null, tags:"", status: ""}})
 
-        })
+        }).then(this.props.getNewStuff())
+
 
         //add logic for rendering             
     }
@@ -82,7 +83,7 @@ class DeedCreateForm extends Component {
                                 <div className = "inner-form-box">
 
                                 <div className="field">
-                                    {/* <label for="name" className="label">Name your deed</label> */}
+                                    {/* <label for="title" className="label">Title your deed</label> */}
                                     <input name="title" className="input" type="text" placeholder="Title your deed" value={this.state.deed ? this.state.deed.title : ""}/>
                                 </div>
 
@@ -103,7 +104,7 @@ class DeedCreateForm extends Component {
 
                                 <div className="field">
                                     <select name="scale" className="input" >
-                                        <option value="" disabled selected>What's the time scale?</option>
+                                        <option value="" disabled defaultValue>What's the time scale?</option>
                                         <option value="Minutes">Minutes</option>
                                         <option value="Hours">Hours</option>
                                         <option value="Days">Days</option>

@@ -1,4 +1,5 @@
 import React, { Component, Fragment} from 'react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class DeedCard extends Component {
   
@@ -30,13 +31,13 @@ class DeedCard extends Component {
   
     render() {
     return <div className="box">
-        <h2>{this.props.name}</h2>
+        <Link style={{marginRight: '1em'}} to={`/deeds/${this.props.deed_id}`} ><h2>{this.props.title}</h2></Link>
         <h3>Importance: {this.props.importance} * Desirability: {this.props.desirability} = Score: {(this.props.importance * this.props.desirability /100)}</h3>
-        {this.props.start ? <h4>Due:{this.props.start} {this.props.duetime ? this.props.duetime :null}</h4> :null}
+        {/* {this.props.start ? <h4>Due:{this.props.start} {this.props.duetime ? this.props.duetime :null}</h4> :null} */}
         {this.props.scale ? <h4>Scale: {this.props.scale}</h4> : null}
         {this.props.supplies ? <p>Supplies: {this.props.supplies}</p> : null }
         {this.props.pack ? <p>Pack: {this.props.pack}</p> : null }
-        {this.props.environment ? <p>Environment: {this.props.environment}</p> : null }
+        {/* {this.props.environment ? <p>Environment: {this.props.environment}</p> : null } */}
         {this.props.status ? <p>Status: {this.props.status}</p> : null }
         <form onSubmit={this.updateDeed} title={this.props.deed_id}>
             <div className="field">

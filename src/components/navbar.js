@@ -12,6 +12,7 @@ const NavBar = () => {
         <nav className="navbar is-transparent" role="navigation" aria-label="main navigation" style = {styles.navbarColor}>
           <div className="navbar-brand">
             <a className="navbar-item" href="#">
+              <img src="../../checkmarkaqua.png" width="44" height="54"/>
               Donezo
             </a>
 

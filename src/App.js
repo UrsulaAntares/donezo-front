@@ -1,17 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
-import Login from './components/login'
-import Dashboard from './components/dashboard'
+import Login from './components/login';
+import Dashboard from './components/dashboard';
 import NavBar from './components/navbar';
 import EnvironmentList from './containers/environmentList';
 import DeedCreateForm from './components/deedCreateForm';
 import DeedList from './containers/deedList';
 import EnvironmentPage from './components/environmentPage';
-import TagPage from './components/tagPage'
-import TagList from './containers/tagList'
+import TagPage from './components/tagPage';
+import TagList from './containers/tagList';
 import Calendar from './containers/calendar';
-import DeedDetail from './components/deedDetail'
+import DeedDetail from './components/deedDetail';
+import ShoppingList from './containers/shoppingList'
 
 class App extends React.Component {
 
@@ -62,14 +63,25 @@ componentDidMount() {
       fetch('http://localhost:3001/tags').then(res => res.json()).then(tags => this.setState({tags: tags}))
     }
 
+    getShoppings=()=> {
+      fetch('http://localhost:3001/shoppings').then(res => res.json()).then(shoppings => this.setState({shoppings: shoppings}))
+    }
+
     getDeeds=()=> {
       fetch('http://localhost:3001/deeds').then(res => res.json()).then(deeds => this.setState({deeds: deeds})).then(this.tallyScore)
     }
 
-    componentWillMount(){
+    getNewStuff=()=>{
       this.getEnvironments()
       this.getDeeds()
       this.getTags()
+      this.getShoppings()
+      console.log("We got new stuff")
+    }
+
+
+    componentWillMount(){
+      this.getNewStuff()
       // let unDoneDeeds =  this.state.deeds.filter((deed) => {return deed.status !== "Donezo" && deed.status !== "Nevermind"} )
       //   this.setState({unDoneDeeds: unDoneDeeds})
     }
@@ -114,7 +126,7 @@ componentDidMount() {
 
           <div>Balance:{this.state.score ? this.state.score : 0 }</div> 
         <DeedCreateForm user={this.state.user} environments={this.state.environments} unDoneDeeds={this.state.unDoneDeeds? this.state.unDoneDeeds : null} 
-            getDeeds={this.getDeeds} tallyScore={this.tallyScore}
+            getDeeds={this.getDeeds} tallyScore={this.tallyScore} getNewStuff={this.getNewStuff}
             functionToRender={()=>console.log("You tried to make an deed and now you're trying to render it")}/>
 
           <Route exact path = "/" render = {() => 
@@ -129,6 +141,9 @@ componentDidMount() {
 
           <Route exact path="/tags" render={() =>
             {return <TagList tags={this.state.tags}/>}} />
+
+          <Route exact path="/shoppinglist" render={() =>
+            {return <ShoppingList getShoppings={this.getShoppings} shoppings={this.state.shoppings}/>}} />
 
           <Route path="/nevermind" render={() =>   
             {return <DeedList deeds={this.state.nevermind}/>}} /> 
@@ -196,7 +211,7 @@ componentDidMount() {
            if (this.state.deeds){
            return (<div>
              
-             <DeedDetail deed = {this.state.deeds.find(deed => deed.id == parseInt(props.match.params.id))}/>
+             <DeedDetail getNewStuff={this.getNewStuff} deed = {this.state.deeds.find(deed => deed.id == parseInt(props.match.params.id))}/>
             </div>
            )}
        }
