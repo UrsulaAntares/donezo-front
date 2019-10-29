@@ -1,5 +1,5 @@
-import React, { Component, Fragment} from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Component} from 'react'
+
 import DeedList from '../containers/deedList';
 
 class TagPage extends Component {
