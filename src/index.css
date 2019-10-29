@@ -23,3 +23,5 @@ body {
 .bar div.fieldColumn{display:inline-block}
 
 .bar input.number{max-width: 3em}
+
+.net {display: inline;}
