@@ -1,6 +1,6 @@
-import React, { Component, Fragment} from 'react'
+import React, { Component} from 'react'
 import DeedCard from '../components/deedCard'
-import DeedDetail from '../components/deedDetail'
+
 
 class DeedList extends Component {
   
