@@ -2,13 +2,38 @@ import React, { Component, Fragment} from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class DeedCard extends Component {
+
+    // this might be bogus
+    
+    constructor(){
+        super()
+        this.state={
+            
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+
+    handleChange=(event) =>{
+        this.setState({deed:{ ...this.state.deed, 
+        
+            status: event.currentTarget.status.value, 
+       
+            }   
+        });
+      }
+
   
     updateDeed=(event)=> {
+        console.log(event)
         let data = {status: event.currentTarget.status.value}
-        let deed_id = event.currentTarget.title
-     
+        // let deed_id = event.currentTarget.title
+        let deed_id = this.props.deed.id // this might be the same as the previous line; which is preferable?
 
             event.preventDefault()
+            console.log("This is an id", deed_id)
             console.log("you're trying to update a deed", data)
         fetch(`http://localhost:3001/deeds/${deed_id}`, {
             method: 'PUT', 
@@ -39,7 +64,7 @@ class DeedCard extends Component {
         {this.props.pack ? <p>Pack: {this.props.pack}</p> : null }
         {/* {this.props.environment ? <p>Environment: {this.props.environment}</p> : null } */}
         {this.props.status ? <p>Status: {this.props.status}</p> : null }
-        <form onSubmit={this.updateDeed} title={this.props.deed_id}>
+        <form onSubmit={this.updateDeed} onChange={this.handleChange} title={this.props.deed_id}>
             <div className="field">
                 <select name="status" className="input" >
                     <option value="" disabled selected>{this.props.status}</option>

@@ -89,6 +89,7 @@ class DeedDetail extends Component {
         let deed_id = this.props.deed.id
      
             event.preventDefault()
+            console.log("This is an id", deed_id)
             console.log("you're trying to update a deed", data)
         fetch(`http://localhost:3001/deeds/${deed_id}`, {
             method: 'PUT', 
