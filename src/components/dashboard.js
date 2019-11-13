@@ -48,7 +48,7 @@ class Dashboard extends Component {
     //     console.log("Total deed score of finished tasks:", totalDeedScore)
     // } 
   
-    // not sure why things won't show in GIT
+ 
     componentWillMount(){
         // this.getEnvironments()
         // this.getDeeds()
