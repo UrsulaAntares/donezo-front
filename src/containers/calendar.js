@@ -1,7 +1,5 @@
-import React, { Component, Fragment} from 'react'
-import { render } from 'react-dom';
-import DeedCard from '../components/deedCard'
-import DeedDetail from '../components/deedDetail'
+import React, { Component} from 'react'
+
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
