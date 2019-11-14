@@ -11,7 +11,7 @@ class DeedCreateForm extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        
 
         }
 
@@ -83,22 +83,21 @@ class DeedCreateForm extends Component {
                                 <div className = "inner-form-box">
 
                                 <div className="field">
-                                    {/* <label for="title" className="label">Title your deed</label> */}
+                                   
                                     <input name="title" className="input" type="text" placeholder="Title your deed" value={this.state.deed ? this.state.deed.title : ""}/>
                                 </div>
 
                                 <div className="field">
-                                    {/* <label htmlFor="start" className="label">When's it due?</label> */}
+                                 
                                 <input name="start" className="input" type="date"  />
                                 </div>
                                 <div className="field">
-                                    {/* <label htmlFor="start" className="label">Is there a time?</label> */}
+
                                 <input name="duetime" className="input" type="time"  />
                                 </div>
 
                                 <div className="field">
-                                    {/* <label htmlFor="duration" className="label">How many minutes will this take?</label> */}
-                                <input name="duration" className="input number" type="number" />
+                                      <input name="duration" className="input number" type="number" />
                                 </div>
 
 
