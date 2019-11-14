@@ -142,7 +142,7 @@ class DeedCreateForm extends Component {
 
                                 <div className="field">
                                     <label htmlFor="importance" className="label">How important is this?</label>
-                                    <input type="range" className="input" min="-100" max="100"  defaultValue="0" class="slider" name="importance" />
+                                    <input type="range" className="input" min="0" max="100"  defaultValue="0" class="slider" name="importance" />
                                 </div>
 
                                 <div className="field">

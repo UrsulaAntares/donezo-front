@@ -142,7 +142,7 @@ class DeedDetail extends Component {
 
         <div className="field">
             <label htmlFor="importance" className="label">How important is this?</label>
-            <input type="range" className="input" min="-100" max="100"  defaultValue="0" value={this.state.deed.importance}
+            <input type="range" className="input" min="0" max="100"  defaultValue="0" value={this.state.deed.importance}
              class="slider" name="importance" />
         </div>
 
