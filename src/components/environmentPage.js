@@ -7,7 +7,7 @@ class EnvironmentPage extends Component {
   
   
     render(props) {
-        // console.log(this.props)
+
     return <div className="card"> 
        
        {this.props.environment.name}

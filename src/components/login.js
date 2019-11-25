@@ -36,7 +36,7 @@ class Login extends Component {
 
     getUsers=()=> {
         let users;
-        console.log("you're trying to get users")
+        // Previously this was just checking the list
         // fetch('http://localhost:3001/users').then(res=>res.json()).then(gottenusers => users.push(gottenusers))
         console.log(users)
         return users
