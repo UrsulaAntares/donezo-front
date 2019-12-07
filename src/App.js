@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Login from './components/login';
 import Dashboard from './components/dashboard';
@@ -84,9 +84,6 @@ componentDidMount() {
       this.getNewStuff()
       // let unDoneDeeds =  this.state.deeds.filter((deed) => {return deed.status !== "Donezo" && deed.status !== "Nevermind"} )
       //   this.setState({unDoneDeeds: unDoneDeeds})
-    }
-
-    componentDidMount(){
       // if (this.state.deeds) {
       //   let unDoneDeeds =  this.state.deeds.filter((deed) => {return deed.status !== "Donezo" && deed.status !== "Nevermind"} )
       //   this.setState({unDoneDeeds: unDoneDeeds})
@@ -211,7 +208,7 @@ componentDidMount() {
            if (this.state.deeds){
            return (<div>
              
-             <DeedDetail getNewStuff={this.getNewStuff} deed = {this.state.deeds.find(deed => deed.id == parseInt(props.match.params.id))}/>
+             <DeedDetail getNewStuff={this.getNewStuff} deed = {this.state.deeds.find(deed => deed.id === parseInt(props.match.params.id))}/>
             </div>
            )}
        }

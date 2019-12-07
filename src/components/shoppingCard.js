@@ -3,7 +3,7 @@ import React, { Component} from 'react'
 class ShoppingCard extends Component {
   
     clickhandler=()=>{
-        // console.log("You clicked the thing")
+
 
         fetch(`http://localhost:3001/shoppings/${this.props.shopping.id}`, {
             method: 'DELETE'

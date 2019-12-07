@@ -35,7 +35,7 @@ const NavBar = () => {
                 to = "/login"
                 exact
               >Login</NavLink> : null }
-              {/* Login link only shows if no one logged in */}
+
               <NavLink
                 className = "navbar-item"
                 to = "/environments"
@@ -59,8 +59,8 @@ const NavBar = () => {
                   {/* <NavLink className="button is-primary"
                   to ="/users/new">
                     <strong>Sign up</strong>
-                  </NavLink> */}
-
+              </NavLink>*/}
+      
                   <NavLink className="button is-light"
                   to = "/logout"
                   exact
