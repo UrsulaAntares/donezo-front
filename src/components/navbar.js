@@ -56,10 +56,10 @@ const NavBar = () => {
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="buttons">
-                  <NavLink className="button is-primary"
+                  {/* <NavLink className="button is-primary"
                   to ="/users/new">
                     <strong>Sign up</strong>
-                  </NavLink>
+                  </NavLink> */}
 
                   <NavLink className="button is-light"
                   to = "/logout"
