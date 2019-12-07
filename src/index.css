@@ -25,3 +25,10 @@ body {
 .bar input.number{max-width: 3em}
 
 .net {display: inline;}
+
+.bar-card {
+  display:inline-block;
+  max-width:200px;
+  margin: 0 .5%;
+  padding: .5%;
+}
